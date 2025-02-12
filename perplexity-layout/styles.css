@@ -1,0 +1,87 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    color: #fff;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    --grey-1: oklch(21.7% 0.002 197.042);
+    --grey-2: oklch(25.0% 0.003 196.966);
+    --grey-3: #2e2e2e;
+    --grey-4: #999;
+    --highlight: oklch(71.9% 0.119 209.76);
+}
+
+body {
+    background-color: var(--grey-2);
+}
+
+.left {
+    width: 220px;
+    height: 100vh;
+}
+
+.right {
+    background-color: var(--grey-1);
+    margin: 8px 8px 8px 0;
+    border-radius: 10px;
+    border: 1px solid var(--grey-3);
+}
+
+.left svg {
+    width: 140px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.stroke-super{
+    stroke: var(--highlight);
+}
+
+.fill-textMain{
+    fill:oklch(93.0% 0.003 106.451);
+}
+
+.search-bar {
+    background-color: var(--grey-1);
+    border-radius: 99999px;
+    border: 2px solid var(--grey-3);
+    padding: 7px 12px;
+    margin: 20px;
+    display: grid;
+    grid-template-columns:  1fr auto auto;
+    align-items: center;
+    gap: 2px;
+}
+
+.search-bar .text {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--grey-4);
+    font-size: 14px;
+    min-width: 10px;
+}
+
+.search-bar:hover {
+    border: 2px solid var(--highlight);
+}
+
+.key {
+    border-radius: 5px;
+    padding: 5px;
+    width: 10px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--grey-4);
+    font-size: 11px;
+    border: 1px solid var(--grey-3);
+}
