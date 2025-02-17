@@ -16,7 +16,7 @@ ul {
 
 body {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
     color: #fff;
     width: 100vw;
     height: 100vh;
@@ -207,14 +207,151 @@ body {
 }
 
 
-@font-face{font-family:fkGroteskNeue;src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/80d90e1e722a80dc-s.p.woff2) format("woff2");font-display:swap}@font-face{font-family:fkGroteskNeue Fallback;src:local("Arial");ascent-override:93.32%;descent-override:31.11%;line-gap-override:0.00%;size-adjust:102.87%}.__className_598ab8{font-family:fkGroteskNeue,fkGroteskNeue Fallback}.__variable_598ab8{--font-fk-grotesk-neue:"fkGroteskNeue","fkGroteskNeue Fallback"}@font-face{font-family:fkGrotesk;src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/3c0a20a48548ae37-s.p.woff2) format("woff2");font-display:swap}@font-face{font-family:fkGrotesk Fallback;src:local("Arial");ascent-override:89.13%;descent-override:29.71%;line-gap-override:0.00%;size-adjust:107.71%}.__className_8a67e8{font-family:fkGrotesk,fkGrotesk Fallback}.__variable_8a67e8{--font-fk-grotesk:"fkGrotesk","fkGrotesk Fallback"}@font-face{font-family:berkeleyMono;src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/b06d54d0a237533a-s.p.woff2) format("woff2");font-display:swap}@font-face{font-family:berkeleyMono Fallback;src:local("Arial");ascent-override:72.70%;descent-override:18.56%;line-gap-override:0.00%;size-adjust:131.49%}.__className_1826c3{font-family:berkeleyMono,berkeleyMono Fallback}.__variable_1826c3{--font-berkeley-mono:"berkeleyMono","berkeleyMono Fallback"}@font-face{font-family:ppEditorial;src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/e8d05d87005ce07f-s.p.woff2) format("woff2");font-display:swap;font-weight:900;font-style:italic}@font-face{font-family:ppEditorial;src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/b8107bede19baa40-s.p.woff2) format("woff2");font-display:swap;font-weight:900;font-style:normal}@font-face{font-family:ppEditorial;src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/2ba03bcf4600f506-s.p.woff2) format("woff2");font-display:swap;font-style:italic}@font-face{font-family:ppEditorial;src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/404d16a48cfd5dcd-s.p.woff2) format("woff2");font-display:swap;font-style:normal}@font-face{font-family:ppEditorial Fallback;src:local("Arial");ascent-override:119.85%;descent-override:32.69%;line-gap-override:10.90%;size-adjust:91.78%}.__className_dd3642{font-family:ppEditorial,ppEditorial Fallback}.__variable_dd3642{--font-pp-editorial:"ppEditorial","ppEditorial Fallback"}@font-face{font-family:"instrumentSerif";src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/24437d246c9412ba-s.p.woff2) format("woff2");font-display:swap;font-style:normal}@font-face{font-family:"instrumentSerif";src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/18a8383f82b767c1-s.p.woff2) format("woff2");font-display:swap;font-style:italic}@font-face{font-family:"instrumentSerif Fallback";src:local("Arial");ascent-override:128.92%;descent-override:40.37%;line-gap-override:0.00%;size-adjust:76.79%}
+@font-face {
+    font-family: fkGroteskNeue;
+    src: url(https://pplx-next-static-public.perplexity.ai/_next/static/media/80d90e1e722a80dc-s.p.woff2) format("woff2");
+    font-display: swap
+}
 
-.right{
+@font-face {
+    font-family: fkGroteskNeue Fallback;
+    src: local("Arial");
+    ascent-override: 93.32%;
+    descent-override: 31.11%;
+    line-gap-override: 0.00%;
+    size-adjust: 102.87%
+}
+
+.__className_598ab8 {
+    font-family: fkGroteskNeue, fkGroteskNeue Fallback
+}
+
+.__variable_598ab8 {
+    --font-fk-grotesk-neue: "fkGroteskNeue", "fkGroteskNeue Fallback"
+}
+
+@font-face {
+    font-family: fkGrotesk;
+    src: url(https://pplx-next-static-public.perplexity.ai/_next/static/media/3c0a20a48548ae37-s.p.woff2) format("woff2");
+    font-display: swap
+}
+
+@font-face {
+    font-family: fkGrotesk Fallback;
+    src: local("Arial");
+    ascent-override: 89.13%;
+    descent-override: 29.71%;
+    line-gap-override: 0.00%;
+    size-adjust: 107.71%
+}
+
+.__className_8a67e8 {
+    font-family: fkGrotesk, fkGrotesk Fallback
+}
+
+.__variable_8a67e8 {
+    --font-fk-grotesk: "fkGrotesk", "fkGrotesk Fallback"
+}
+
+@font-face {
+    font-family: berkeleyMono;
+    src: url(https://pplx-next-static-public.perplexity.ai/_next/static/media/b06d54d0a237533a-s.p.woff2) format("woff2");
+    font-display: swap
+}
+
+@font-face {
+    font-family: berkeleyMono Fallback;
+    src: local("Arial");
+    ascent-override: 72.70%;
+    descent-override: 18.56%;
+    line-gap-override: 0.00%;
+    size-adjust: 131.49%
+}
+
+.__className_1826c3 {
+    font-family: berkeleyMono, berkeleyMono Fallback
+}
+
+.__variable_1826c3 {
+    --font-berkeley-mono: "berkeleyMono", "berkeleyMono Fallback"
+}
+
+@font-face {
+    font-family: ppEditorial;
+    src: url(https://pplx-next-static-public.perplexity.ai/_next/static/media/e8d05d87005ce07f-s.p.woff2) format("woff2");
+    font-display: swap;
+    font-weight: 900;
+    font-style: italic
+}
+
+@font-face {
+    font-family: ppEditorial;
+    src: url(https://pplx-next-static-public.perplexity.ai/_next/static/media/b8107bede19baa40-s.p.woff2) format("woff2");
+    font-display: swap;
+    font-weight: 900;
+    font-style: normal
+}
+
+@font-face {
+    font-family: ppEditorial;
+    src: url(https://pplx-next-static-public.perplexity.ai/_next/static/media/2ba03bcf4600f506-s.p.woff2) format("woff2");
+    font-display: swap;
+    font-style: italic
+}
+
+@font-face {
+    font-family: ppEditorial;
+    src: url(https://pplx-next-static-public.perplexity.ai/_next/static/media/404d16a48cfd5dcd-s.p.woff2) format("woff2");
+    font-display: swap;
+    font-style: normal
+}
+
+@font-face {
+    font-family: ppEditorial Fallback;
+    src: local("Arial");
+    ascent-override: 119.85%;
+    descent-override: 32.69%;
+    line-gap-override: 10.90%;
+    size-adjust: 91.78%
+}
+
+.__className_dd3642 {
+    font-family: ppEditorial, ppEditorial Fallback
+}
+
+.__variable_dd3642 {
+    --font-pp-editorial: "ppEditorial", "ppEditorial Fallback"
+}
+
+@font-face {
+    font-family: "instrumentSerif";
+    src: url(https://pplx-next-static-public.perplexity.ai/_next/static/media/24437d246c9412ba-s.p.woff2) format("woff2");
+    font-display: swap;
+    font-style: normal
+}
+
+@font-face {
+    font-family: "instrumentSerif";
+    src: url(https://pplx-next-static-public.perplexity.ai/_next/static/media/18a8383f82b767c1-s.p.woff2) format("woff2");
+    font-display: swap;
+    font-style: italic
+}
+
+@font-face {
+    font-family: "instrumentSerif Fallback";
+    src: local("Arial");
+    ascent-override: 128.92%;
+    descent-override: 40.37%;
+    line-gap-override: 0.00%;
+    size-adjust: 76.79%
+}
+
+.right {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 20px;
     position: relative;
 }
 
@@ -235,7 +372,7 @@ body {
     text-align: center;
 }
 
-.right-searchbox{
+.right-searchbox {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -249,7 +386,7 @@ body {
     gap: 10px;
 }
 
-.right-searchbox textarea{
+.right-searchbox textarea {
     background-color: transparent;
     border: none;
     outline: none;
@@ -260,7 +397,7 @@ body {
     width: 100%;
 }
 
-.right-searchbox-controls{
+.right-searchbox-controls {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -270,7 +407,7 @@ body {
     color: var(--grey-4);
 }
 
-.right-searchbox-controls button{
+.right-searchbox-controls button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -279,33 +416,33 @@ body {
     border-radius: 99999px;
 }
 
-.right-searchbox-controls button:hover{
+.right-searchbox-controls button:hover {
     background-color: var(--grey-3);
     color: #fff;
 }
 
-.right-searchbox-controls svg{
+.right-searchbox-controls svg {
     width: 16px;
     height: 16px;
 }
 
-.right-searchbox-controls .btn-auto{
+.right-searchbox-controls .btn-auto {
     border: 1px solid var(--grey-3);
     font-size: 14px;
     padding: 8px 12px;
     border-radius: 5px;
 }
 
-.right-searchbox-controls .btn-auto svg:last-child{
+.right-searchbox-controls .btn-auto svg:last-child {
     width: 10px;
     height: 10px;
 }
 
-.btn-submit{
+.btn-submit {
     background-color: var(--grey-3);
 }
 
-.suggested_search{
+.suggested_search {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(2, 60px);
@@ -313,14 +450,14 @@ body {
     margin-top: 30px;
 }
 
-.suggested_search img{
+.suggested_search img {
 
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
 }
 
-.suggested_search button{
+.suggested_search button {
     background-color: var(--grey-2);
     color: #ccc;
     border: none;
@@ -333,12 +470,18 @@ body {
     border-radius: 5px;
 }
 
-.suggested_search button:hover{
+.suggested_search button:hover {
     background-color: var(--grey-3);
     color: #fff;
 }
 
-footer{
+.suggested_search button>div {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 100%;
+}
+
+footer {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -351,18 +494,18 @@ footer{
     padding: 10px;
 }
 
-footer a{
+footer a {
     color: var(--grey-4);
     font-size: 13px;
 }
 
-footer a:hover{
+footer a:hover {
     color: #fff;
     text-decoration: underline;
     cursor: pointer;
 }
 
-.fab{
+.fab {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -375,13 +518,66 @@ footer a:hover{
     justify-content: center;
 }
 
-.fab svg{
+.fab svg {
     width: 16px;
     height: 16px;
 }
 
-.fab:hover{
+.fab:hover {
     background-color: #fff;
     color: var(--grey-1);
     cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    .right {
+        margin: 0;
+        border: 0;
+        border-left: 1px solid var(--grey-3);
+        border-radius: 0;
+    }
+
+}
+
+@media (max-width: 768px) {
+    body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr) auto;
+    }
+
+    .left {
+        grid-row-start: 2;
+        width: unset;
+        height: unset;
+    }
+
+    .left>*,
+    .left>.menu>li>ul {
+        display: none;
+    }
+
+    .left>.menu {
+        display: flex;
+    }
+
+    .menu,
+    .menu>li {
+        height: fit-content;
+        flex: 1;
+    }
+
+    .fab {
+        display: none;
+    }
+
+    .menu {
+        justify-content: space-evenly;
+    }
+
+    .menu>li button {
+        flex-direction: column;
+        gap: 3px;
+        padding: 5px;
+    }
+
 }
