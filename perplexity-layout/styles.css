@@ -215,6 +215,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
+    position: relative;
 }
 
 .right-container {
@@ -304,3 +305,83 @@ body {
     background-color: var(--grey-3);
 }
 
+.suggested_search{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, 60px);
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.suggested_search img{
+
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.suggested_search button{
+    background-color: var(--grey-2);
+    color: #ccc;
+    border: none;
+    outline: none;
+    padding: 10px;
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+.suggested_search button:hover{
+    background-color: var(--grey-3);
+    color: #fff;
+}
+
+footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+}
+
+footer a{
+    color: var(--grey-4);
+    font-size: 13px;
+}
+
+footer a:hover{
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.fab{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #ccc;
+    color: var(--grey-1);
+    border-radius: 99999px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fab svg{
+    width: 16px;
+    height: 16px;
+}
+
+.fab:hover{
+    background-color: #fff;
+    color: var(--grey-1);
+    cursor: pointer;
+}
