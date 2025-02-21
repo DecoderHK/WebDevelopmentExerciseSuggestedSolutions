@@ -1,8 +1,12 @@
+"use client";
 
 import styles from "./page.module.css";
 import Image from "next/image";
+import { useAppSelector } from "@/redux/hook";
+
 export default function Home() {
 
+  const count = useAppSelector((state) => state.counter.value);
 
   const posts = [
     {
@@ -84,7 +88,7 @@ export default function Home() {
     display_name: "Hannah",
     bio: "I'm a cat.",
     image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    n_followers: 101,
+    n_followers: count,
     n_following: 345,
     n_posts: 9,
   }

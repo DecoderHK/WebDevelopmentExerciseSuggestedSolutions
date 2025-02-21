@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 export async function GET(request: Request) {
 
-    mongoose.connect('mongodb+srv://admin:12341234@cluster0.8wyl7.mongodb.net/IG');
+    mongoose.connect(process.env.MONGO_URI as string);
 
     const posts = await Post.find();
 
@@ -14,3 +14,4 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ posts: posts });
 }
+

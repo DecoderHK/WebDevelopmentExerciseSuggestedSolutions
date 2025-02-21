@@ -1,6 +1,10 @@
+"use client";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,13 +16,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Instagram",
-  description: "Instagram Clone",
-  icons: {
-    icon: "https://static.cdninstagram.com/rsrc.php/y4/r/QaBlI0OZiks.ico",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "Instagram",
+//   description: "Instagram Clone",
+//   icons: {
+//     icon: "https://static.cdninstagram.com/rsrc.php/y4/r/QaBlI0OZiks.ico",
+//   },
+// };
 
 export default function RootLayout({
   children,
@@ -26,10 +30,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
-    </html>
+    <Provider store={store}>
+      <html lang="en">
+        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+          {children}
+        </body>
+      </html>
+    </Provider>
   );
 }
