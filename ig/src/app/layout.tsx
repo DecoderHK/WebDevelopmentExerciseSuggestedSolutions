@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Instagram",
-  description: "Instagram",
+  description: "Instagram Clone",
   icons: {
     icon: "https://static.cdninstagram.com/rsrc.php/y4/r/QaBlI0OZiks.ico",
   },
