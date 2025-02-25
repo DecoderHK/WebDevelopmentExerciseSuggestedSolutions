@@ -1,13 +1,26 @@
 import { NextResponse } from "next/server";
-
-export async function GET(request: Request) {
-    return NextResponse.json({ message: "Login successful" });
-}
+import { User } from "@/db/schema";
+import mongoose from "mongoose";
+import crypto from "crypto";
+import jwt from 'jsonwebtoken';
 
 export async function POST(request: Request) {
+
+    mongoose.connect(process.env.MONGO_URI as string);
+
     const { username, password } = await request.json();
 
-    console.log(username, password);
-    
-    return NextResponse.json({ message: "Login successful" });
+    const user = await User.findOne({ 
+        "username": username, 
+        "password": crypto.createHash('sha256').update(password.toString()).digest('hex')
+    });
+
+    if (!user) {
+        return NextResponse.json({ message: "Invalid username or password" }, { status: 401 });
+    }
+
+
+    const token = jwt.sign({ "username": username }, process.env.JWT_SECRET as string);
+
+    return NextResponse.json({ message: "Login successful", token: token });
 }

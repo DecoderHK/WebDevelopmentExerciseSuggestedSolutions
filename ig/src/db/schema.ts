@@ -8,4 +8,11 @@ const postSchema = new Schema({
     n_comment: Number,
 });
 
+const userSchema = new Schema({
+    id: Number,
+    username: String,
+    password: String,
+});
+
 export const Post =  mongoose.model('post', postSchema);
+export const User =  mongoose.model('user', userSchema);
