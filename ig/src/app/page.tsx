@@ -2,11 +2,23 @@
 
 import styles from "./page.module.css";
 import Image from "next/image";
-import { useAppSelector } from "@/redux/hook";
+import { useAppSelector, useAppDispatch } from "@/redux/hook";
+import { increment } from "@/redux/counterSlice";
+import { redirect, useRouter } from "next/navigation";
 
 export default function Home() {
 
+  const router = useRouter();
+
+  const authToken = useAppSelector((state) => state.counter.authToken);
+
+  if (!authToken) {
+    router.replace("/login");
+  }
+
   const count = useAppSelector((state) => state.counter.value);
+  
+  const dispatch = useAppDispatch();
 
   const posts = [
     {
@@ -124,7 +136,9 @@ export default function Home() {
               <span>{profile.bio}</span>
             </div>
             <div>
-              <button className={styles.addPostButton}>Add post</button>
+              <button className={styles.addPostButton} onClick={() => {
+                dispatch(increment());
+              }}>Add post</button>
             </div>
           </div>
         </div>
