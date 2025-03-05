@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useAppSelector, useAppDispatch } from "@/redux/hook";
 import { increment } from "@/redux/counterSlice";
 import { redirect, useRouter } from "next/navigation";
+import NewPost from "@/component/newPost";
 
 export default function Home() {
 
@@ -136,9 +137,9 @@ export default function Home() {
               <span>{profile.bio}</span>
             </div>
             <div>
-              <button className={styles.addPostButton} onClick={() => {
-                dispatch(increment());
-              }}>Add post</button>
+              <NewPost>
+                <button className={styles.addPostButton}>Add post</button>
+              </NewPost>
             </div>
           </div>
         </div>
