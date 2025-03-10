@@ -12,7 +12,7 @@ export default function NewPost({ children }: { children: React.ReactNode }) {
         const current_timestamp = Date.now();
 
         const image_names: string[] = [];
-        
+
         await Promise.all(imagesB64.map(async (image, index) => {
             const fname = "image" + current_timestamp + "_" + index;
             image_names.push(fname);
@@ -33,7 +33,12 @@ export default function NewPost({ children }: { children: React.ReactNode }) {
 
         const response = await fetch("/api/post/create", {
             method: "POST",
-            body: JSON.stringify({ description: description, image_urls: image_names }),
+            body: JSON.stringify({ 
+                description: description, 
+                image_urls: image_names.map(name => 
+                    `https://${process.env.NEXT_PUBLIC_BUCKET_NAME}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/${name}`
+                )
+            }),
         });
 
         setShow(false);

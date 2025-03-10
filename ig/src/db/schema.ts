@@ -14,5 +14,5 @@ const userSchema = new Schema({
     password: String,
 });
 
-export const Post =  mongoose.model('post', postSchema);
-export const User =  mongoose.model('user', userSchema);
+export const Post =  mongoose.models.post || mongoose.model('post', postSchema);
+export const User =  mongoose.models.user || mongoose.model('user', userSchema);

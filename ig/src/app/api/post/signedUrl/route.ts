@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     }
 
     const s3 = new S3Client({
-        region: process.env.AWS_REGION,
+        region: process.env.NEXT_PUBLIC_AWS_REGION,
         credentials: {
             accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
             secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
     };
 
     const command = new PutObjectCommand({
-        Bucket: process.env.AWS_BUCKET_NAME!,
+        Bucket: process.env.NEXT_PUBLIC_BUCKET_NAME!,
         Key: filename!,
         ContentType: getMimeType(filename!),
     });
