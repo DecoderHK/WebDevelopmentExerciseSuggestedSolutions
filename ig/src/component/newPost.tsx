@@ -1,13 +1,21 @@
 import { useState } from "react";
 
-export default function NewPost({ children }: { children: React.ReactNode }) {
+interface NewPostProps { 
+    children: React.ReactNode, 
+    onFinish: () => void 
+}
+
+export default function NewPost({ children, onFinish }: NewPostProps) {
 
     const [show, setShow] = useState(false);
     const [imagesB64, setImagesB64] = useState<string[]>([]);
     const [description, setDescription] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
 
     const handlePost = async () => {
+
+        setIsLoading(true);
 
         const current_timestamp = Date.now();
 
@@ -44,13 +52,10 @@ export default function NewPost({ children }: { children: React.ReactNode }) {
         setShow(false);
         setDescription("");
         setImagesB64([]);
+        setIsLoading(false);
 
+        onFinish();
 
-        // const response = await fetch("/api/post/create", {
-        //     method: "POST",
-        //     body: JSON.stringify({ description: description, image_urls: imagesB64 }),
-        // });
-        // console.log(response);
     }
 
     const image_styles = {
@@ -210,7 +215,9 @@ export default function NewPost({ children }: { children: React.ReactNode }) {
                                 fontSize: "16px",
                                 cursor: "pointer",
                                 border: "none",
-                            }} onClick={handlePost}>Post</button>
+                            }} 
+                            onClick={handlePost} 
+                            disabled={isLoading}>{isLoading ? "Creating..." : "Post"}</button>
                         </div>
 
                     </div>

@@ -6,14 +6,26 @@ import { useAppSelector, useAppDispatch } from "@/redux/hook";
 import { increment } from "@/redux/counterSlice";
 import { redirect, useRouter } from "next/navigation";
 import NewPost from "@/component/newPost";
+import { useState, useEffect } from "react";
+import { setAuthToken } from "@/redux/counterSlice";
+
+interface Post {
+  _id: string;
+  description: string | null;
+  image_urls: string[] | null;
+  n_comment: number | null;
+  n_likes: number | null;
+}
 
 export default function Home() {
+
+  
 
   const router = useRouter();
 
   const authToken = useAppSelector((state) => state.counter.authToken);
 
-  if (!authToken) {
+  if (!authToken || authToken == "") {
     router.replace("/login");
   }
 
@@ -21,80 +33,111 @@ export default function Home() {
   
   const dispatch = useAppDispatch();
 
-  const posts = [
-    {
-      id: 1,
-      image: "https://images.unsplash.com/photo-1739641375724-dfea74e0df69?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 2,
-      image: "https://images.unsplash.com/photo-1739433438331-e50bb5467531?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 3,
-      image: "https://images.unsplash.com/photo-1739616194269-46f6247e65fe?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 4,
-      image: "https://images.unsplash.com/photo-1739370327561-87820ea0dd33?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyMHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 5,
-      image: "https://images.unsplash.com/photo-1739369763175-f37f9d898ce4?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 6,
-      image: "https://images.unsplash.com/photo-1739546103938-b30b9b1c828d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 7,
-      image: "https://images.unsplash.com/photo-1739382122846-74e722a6eea4?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 8,
-      image: "https://images.unsplash.com/photo-1739478469491-0f5fba9dc214?q=80&w=1863&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 9,
-      image: "https://images.unsplash.com/photo-1739477021967-e14dc3938e56?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 10,
-      image: "https://images.unsplash.com/photo-1739163519731-c29cbcee8d84?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 11,
-      image: "https://images.unsplash.com/photo-1739178124552-89957c7e3f0e?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-    {
-      id: 12,
-      image: "https://images.unsplash.com/photo-1739129857889-2d6a4e4a4e64?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1NXx8fGVufDB8fHx8fA%3D%3D",
-      n_likes: 10,
-      n_comment: 2,
-    },
-  ];
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('/api/post/list', {
+        headers: {
+          'Authorization': authToken ?? ""
+        }
+      });
+
+      if (response.status == 401) {
+        dispatch(setAuthToken(""));
+        return
+      }
+
+      const responseJson = await response.json();
+      const posts = responseJson.posts
+      console.log(responseJson)
+      setPosts(posts)
+      // Handle the data here
+      console.log(posts);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+  // const posts = [
+  //   {
+  //     id: 1,
+  //     image: "https://images.unsplash.com/photo-1739641375724-dfea74e0df69?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "https://images.unsplash.com/photo-1739433438331-e50bb5467531?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 3,
+  //     image: "https://images.unsplash.com/photo-1739616194269-46f6247e65fe?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 4,
+  //     image: "https://images.unsplash.com/photo-1739370327561-87820ea0dd33?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyMHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 5,
+  //     image: "https://images.unsplash.com/photo-1739369763175-f37f9d898ce4?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 6,
+  //     image: "https://images.unsplash.com/photo-1739546103938-b30b9b1c828d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 7,
+  //     image: "https://images.unsplash.com/photo-1739382122846-74e722a6eea4?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 8,
+  //     image: "https://images.unsplash.com/photo-1739478469491-0f5fba9dc214?q=80&w=1863&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 9,
+  //     image: "https://images.unsplash.com/photo-1739477021967-e14dc3938e56?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 10,
+  //     image: "https://images.unsplash.com/photo-1739163519731-c29cbcee8d84?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 11,
+  //     image: "https://images.unsplash.com/photo-1739178124552-89957c7e3f0e?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  //   {
+  //     id: 12,
+  //     image: "https://images.unsplash.com/photo-1739129857889-2d6a4e4a4e64?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1NXx8fGVufDB8fHx8fA%3D%3D",
+  //     n_likes: 10,
+  //     n_comment: 2,
+  //   },
+  // ];
 
   const profile = {
     name: "h.a.n.a.n.a",
@@ -137,7 +180,9 @@ export default function Home() {
               <span>{profile.bio}</span>
             </div>
             <div>
-              <NewPost>
+              <NewPost onFinish={() => {
+                fetchData();
+              }}>
                 <button className={styles.addPostButton}>Add post</button>
               </NewPost>
             </div>
@@ -160,11 +205,10 @@ export default function Home() {
         </div>
 
         <div className={styles.posts}>
-          {posts.map((post) => (
-            <div className={styles.post} key={post.id}>
+          {posts?.map((post) => (
+            <div className={styles.post} key={post._id}>
 
-              <Image src={post.image} alt="Post" fill
-                style={{ objectFit: 'cover' }} />
+              <img src={post.image_urls?.[0]} alt="Post" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
 
               <div className={styles.postInfo}>
                 <div>

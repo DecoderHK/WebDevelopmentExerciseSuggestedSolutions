@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     }
 
 
-    const token = jwt.sign({ "username": username }, process.env.JWT_SECRET as string);
+    const token = jwt.sign({ username: username, user_id: user._id }, process.env.JWT_SECRET as string);
 
     return NextResponse.json({ message: "Login successful", token: token });
 }
