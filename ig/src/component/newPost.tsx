@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/redux/hook";
 import { useState } from "react";
 
 interface NewPostProps { 
@@ -6,6 +7,8 @@ interface NewPostProps {
 }
 
 export default function NewPost({ children, onFinish }: NewPostProps) {
+
+    const authToken = useAppSelector((state) => state.counter.authToken) ?? "";
 
     const [show, setShow] = useState(false);
     const [imagesB64, setImagesB64] = useState<string[]>([]);
@@ -47,6 +50,9 @@ export default function NewPost({ children, onFinish }: NewPostProps) {
                     `https://${process.env.NEXT_PUBLIC_BUCKET_NAME}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/${name}`
                 )
             }),
+            headers: {
+                "Authorization": authToken,
+            }
         });
 
         setShow(false);
