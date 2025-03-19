@@ -2,14 +2,11 @@
 
 import { useParams } from "next/navigation";
 
+import { PostList } from "@/component/postList";
+
 export default function UserProfile() {
 
-    const { username } = useParams();
+  const { username } = useParams();
 
-    return (
-      <div>
-        <h1>User Profile</h1>
-        <h2>{username}</h2>
-      </div>
-    );
-  }
+  return <PostList username={username as string} />
+}
